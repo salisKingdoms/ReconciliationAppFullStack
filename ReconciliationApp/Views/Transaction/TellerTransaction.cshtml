@@ -1,0 +1,278 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Transaction Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="container-fluid" id="formCrud" style="display:none">
+            <div class="card shadow mb-4">
+                <div class="card-header ">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Deposit Transaction
+                    </h6>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">TransactionCode </label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <input type="text" class="form-control" id="transID" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Teller ID </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest" style="min-height:10%">
+                                <input type="text" class="form-control" id="tellerID" />
+                            </div>
+
+                            <label class="col-md-2 control-label">Customer Code </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest">
+                                <select id="customerList" class="form-control sprites-arrow-down" name="TaskFitToWork" onchange="getCustomerCode();">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Transaction Type </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest">
+                                <select id="transType" class="form-control sprites-arrow-down">
+                                    <option value="">Select</option>
+                                    <option value="Deposit">Deposit</option>
+                                    <option value="Withdrawal">Withdrawal</option>
+                                    <option value="Exchange">Exchange</option>
+                                </select>
+                            </div>
+
+                            <label class="col-md-2 control-label">Currency </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest">
+                                <select id="currencyType" class="form-control sprites-arrow-down">
+                                    <option value="">Select</option>
+                                    <option value="IDR">IDR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="SGD">SGD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Denomination </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest" style="min-height:10%">
+                                <input type="number" class="form-control" id="denomination" />
+                            </div>
+
+                            <label class="col-md-2 control-label">Amount </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest" style="min-height:10%">
+                                <input type="number" class="form-control" id="amount" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Tansaction Date </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest" style="min-height:10%">
+                                <input class="form-control" type="date" id="trxDate" />
+                            </div>
+
+                            <label class="col-md-2 control-label">Bank PIC </label>
+                            <div class="input-group date col-md-4" data-target-input="nearest" style="min-height:10%">
+                                <input type="text" class="form-control" id="pic" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-horizontal">
+                        <div class="d-flex justify-content-center">
+                            <div class="row" runat="server">
+                                <button id="btnSubmit" class="btn btn-success" onclick="saveData()"><em class="fa fa-paper-plane"></em> Save</button>
+                                &nbsp;
+                                <button id="btnClose" class="btn btn-dark" onclick="onClose()"><em class="fa fa-times-circle"></em> Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid" id="formList">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                   role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Filter Search</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">Transaction Type</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <select id="typeFilter" class="form-control sprites-arrow-down">
+                                        <option value="">Select</option>
+                                        <option value="Deposit">Deposit</option>
+                                        <option value="Withdrawal">Withdrawal</option>
+                                        <option value="Exchange">Exchange</option>
+                                    </select>
+                                </div>
+
+                                <label class="col-md-2 control-label">Currency</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <select id="currencyFilter" class="form-control sprites-arrow-down">
+                                        <option value="">Select</option>
+                                        <option value="IDR">IDR</option>
+                                        <option value="USD">USD</option>
+                                        <option value="SGD">SGD</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">Date Start </label>
+                                <div class="input-group date col-md-3" data-target-input="nearest">
+                                    <input class="form-control" type="date" id="datePickerFrom" />
+                                </div>
+
+                                <label class="col-md-2 control-label">Date End </label>
+                                <div class="input-group date col-md-3" data-target-input="nearest">
+                                    <input class="form-control" type="date" id="datePickerTo" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">No</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <input type="text" class="form-control" id="txtNO" />
+                                </div>
+
+                                <label class="col-md-2 control-label">Customer Code</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <input type="text" class="form-control" id="txtcustCode" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">Amount</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <input type="number" class="form-control" id="txtAmount" />
+                                </div>
+
+                                <label class="col-md-2 control-label">Bank PIC</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <input type="text" class="form-control" id="txtPIC" />
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="input-group col-md-3" id="ActionButton" data-target-input="nearest">
+                                    <div class="col-md-12" runat="server" style="padding-left:0">
+                                        <a id="btnSearch" href="javascript:void(0)" class="btn btn-sm btn-info" onclick="searchFilter()"><em class="fa fa-search"></em> Search</a>
+                                        @*<a id="btnExportExcel" href="javascript:void(0)" class="btn btn-sm btn-success" onclick="exportData()"><em class="fa fa-print"></em> Print Excel</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <span class="m-0 font-weight-bold text-primary">Data Transaction</span>
+                </div>
+                <div class="card-body">
+                    <a id="btnOpenBalance" class="btn btn-sm btn-warning" onclick="onOpeningBalance()"><em class="fa fa-save"></em> Opening Balance</a>&nbsp;&nbsp;
+                    <a id="btnAdd" class="btn btn-sm btn-success" onclick="onAddNew()"><em class="fa fa-plus"></em> Add New</a>
+                    <br /><br />
+                    <div class="table-responsive ">
+                        <table class="table table-bordered " id="listData" width="100%" cellspacing="0">
+                            <caption>Data Transaction</caption>
+                            <thead>
+                                <tr>
+                                    <th class="headerBg" style="width:3%">
+                                        Action
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        No
+                                    </th>
+                                    <th class="headerBg" style="width:7%">
+                                        Customer Code
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Transaction Type
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Currency
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Amount
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Transaction Date
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Bank PIC
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Modal Delete Confirmation*@
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Delete" below if you are sure to delete your transaction.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="closeModal()">No</button>
+                        <a class="btn btn-primary" onclick="deleteChoosen()">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+    </div>
+</div>
+<script src="~/myjs/deposit_transaction.js"></script>

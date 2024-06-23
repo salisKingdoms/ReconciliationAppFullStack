@@ -1,0 +1,121 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Reconcile Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+
+        <div class="container-fluid" id="formList">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                   role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Search Reconciliation</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">Date Start </label>
+                                <div class="input-group date col-md-3" data-target-input="nearest">
+                                    <input class="form-control" type="date" id="datePickerFrom" />
+                                </div>
+
+                                <label class="col-md-2 control-label">Date End </label>
+                                <div class="input-group date col-md-3" data-target-input="nearest">
+                                    <input class="form-control" type="date" id="datePickerTo" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group row" runat="server">
+                                <label class="col-md-2 control-label">Teller ID</label>
+                                <div class="input-group col-md-3" data-target-input="nearest">
+                                    <input type="text" class="form-control" id="txtTellerID" />
+                                </div>
+
+
+                                <div class="input-group col-md-2" data-target-input="nearest">
+                                    <div class="col-md-10" runat="server" style="padding-left:0">
+                                        <a id="btnSearch" href="javascript:void(0)" class="btn btn-sm btn-info" onclick="searchReconcile()"><em class="fa fa-search"></em> Search</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <span class="m-0 font-weight-bold text-primary">Data Reconciliation</span>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive ">
+                        <table class="table table-bordered " id="listData" width="100%" cellspacing="0">
+                            <caption>Data Transaction</caption>
+                            <thead>
+                                <tr>
+                                    <th class="headerBg" style="width:5%">
+                                        Teller ID
+                                    </th>
+                                    <th class="headerBg" style="width:7%">
+                                        Transaction Date
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Total Deposits
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Total Withdrawals
+                                    </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <span class="m-0 font-weight-bold text-primary">Data Balance</span>
+                </div>
+                <div class="card-body">
+                    <a id="btnCloseBalance" class="btn btn-sm btn-danger" onclick="onCloseBalance()"><em class="fa fa-save"></em> Closing Balance</a><br /><br />
+                    <div class="table-responsive ">
+                        <table class="table table-bordered " id="listDataBalance" width="100%" cellspacing="0">
+                            <caption>Data Transaction</caption>
+                            <thead>
+                                <tr>
+                                    <th class="headerBg" style="width:5%">
+                                        Transaction Date
+                                    </th>
+                                    <th class="headerBg" style="width:7%">
+                                        Opening Balance
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Closing Balance
+                                    </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/myjs/reconsile.js"></script>
+

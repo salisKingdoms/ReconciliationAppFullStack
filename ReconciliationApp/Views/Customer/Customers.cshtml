@@ -1,0 +1,143 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Customer Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="container-fluid" id="formCrud" style="display:none">
+            <div class="card shadow mb-4">
+                <div class="card-header ">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Master Customer
+                    </h6>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Code</label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <input type="text" class="form-control" id="custID" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Name* </label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <input type="text" class="form-control" id="custName" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Email* </label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <input type="text" class="form-control" id="email" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Phone* </label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <input type="number" class="form-control" id="phone" maxlength="13" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row" runat="server">
+                            <label class="col-md-2 control-label">Address </label>
+                            <div class="input-group col-md-6" data-target-input="nearest">
+                                <textarea id="address" class="w-100"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="d-flex justify-content-center">
+                            <div class="row" runat="server">
+                                <button id="btnSubmit" class="btn btn-success" onclick="saveData()"><em class="fa fa-paper-plane"></em> Save</button>
+                                &nbsp;
+                                <button id="btnClose" class="btn btn-dark" onclick="onClose()"><em class="fa fa-times-circle"></em> Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid" id="formList">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <span class="m-0 font-weight-bold text-primary">Data Customer</span>
+                </div>
+                <div class="card-body">
+                    <a id="btnAdd" class="btn btn-sm btn-success" onclick="onAddNew()"><em class="fa fa-plus"></em> Add New</a>
+                    <br /><br />
+                    <div class="table-responsive ">
+                        <table class="table table-bordered " id="listData" width="100%" cellspacing="0">
+                            <caption>Data Customer</caption>
+                            <thead>
+                                <tr>
+                                    <th class="headerBg" style="width:3%">
+                                        Action
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Name
+                                    </th>
+                                    <th class="headerBg" style="width:7%">
+                                        Email
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Phone
+                                    </th>
+                                    <th class="headerBg" style="width:5%">
+                                        Address
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Modal Delete Confirmation*@
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Delete" below if you are sure to delete your transaction.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="closeModal()">No</button>
+                        <a class="btn btn-primary" onclick="deleteChoosen()">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+    </div>
+</div>
+<script src="~/myjs/customer.js"></script>
