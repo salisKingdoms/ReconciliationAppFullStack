@@ -10,18 +10,19 @@
 };
 
 $(document).ready(function () {
-    $('#trxDate').datetimepicker
-        ({
-            format: 'YYYY-MM-DD'
-        });
-    $('#datePickerFrom').datetimepicker
-        ({
-            format: 'YYYY-MM-DD'
-        });
-    $('#datePickerTo').datetimepicker
-        ({
-            format: 'YYYY-MM-DD'
-        });
+    //$('#trxDate').datetimepicker
+    //    ({
+    //        format: 'YYYY-MM-DD'
+    //    });
+    //$('#datePickerFrom').datetimepicker
+    //    ({
+    //        format: 'YYYY-MM-DD'
+    //    });
+    //$('#datePickerTo').datetimepicker
+    //    ({
+    //        format: 'YYYY-MM-DD'
+    //    });
+    console.log("tes ok ya");
     var table = $('#listData').DataTable();
     $('#tellerID').prop('disabled', false);
     searchDataListTransaction();

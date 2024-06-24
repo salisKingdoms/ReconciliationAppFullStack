@@ -15,8 +15,13 @@
                     </h6>
                 </div>
 
-                <div class="card-body">
+               @*  <div class="alert alert-danger alert-dismissible" role="alert">
+                    This is a danger dismissible alert — check it out!
+                    <label id="errlbl" class="col-md-2 control-label"></label>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> *@
 
+                <div class="card-body">
                     <div class="form-horizontal">
                         <div class="form-group row" runat="server">
                             <label class="col-md-2 control-label">Code</label>
@@ -62,18 +67,10 @@
                         </div>
                     </div>
 
-                    <div class="form-horizontal">
-                        <div class="d-flex justify-content-center">
-                            <div class="row" runat="server">
-                                <button id="btnSubmit" class="btn btn-success" onclick="saveData()"><em class="fa fa-paper-plane"></em> Save</button>
-                                &nbsp;
-                                <button id="btnClose" class="btn btn-dark" onclick="onClose()"><em class="fa fa-times-circle"></em> Close</button>
-
-                            </div>
-                        </div>
+                    <div class="mt-2">
+                        <button id="btnSubmit" class="btn btn-primary" onclick="saveData()">Save</button>
+                        <button id="btnClose" class="btn btn-secondary" onclick="onClose()">Close</button>
                     </div>
-
-
 
                 </div>
             </div>
@@ -87,7 +84,7 @@
                     <span class="m-0 font-weight-bold text-primary">Data Customer</span>
                 </div>
                 <div class="card-body">
-                    <a id="btnAdd" class="btn btn-sm btn-success" onclick="onAddNew()"><em class="fa fa-plus"></em> Add New</a>
+                    <button id="btnAdd" class="btn btn-primary" type="button" onclick="onAddNew()"> Add New</button>
                     <br /><br />
                     <div class="table-responsive ">
                         <table class="table table-bordered " id="listData" width="100%" cellspacing="0">
@@ -125,14 +122,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Delete" below if you are sure to delete your transaction.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="closeModal()">No</button>
-                        <a class="btn btn-primary" onclick="deleteChoosen()">Delete</a>
+                        <button class="btn btn-primary" type="button" data-dismiss="modal" onclick="deleteChoosen()">Delete</button>
                     </div>
                 </div>
             </div>

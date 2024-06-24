@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    console.log("yess document ready");
     var table = $('#listData').DataTable();
     $('#custID').css('disabled', 'false');
     searchDataListCustomer();
@@ -20,6 +21,7 @@ function validationSubmit() {
     }
 
     if ($('#phone').val() == "" || parseInt($('#phone').val()) == 0) {
+        console.log("Phone must be filled");
         toastr.error("Phone must be filled");
         isokSubmit = false;
     }
@@ -192,8 +194,8 @@ function searchDataListCustomer() {
                 "data": "ID", "name": "-Action-", "targets": "1",
                 "render": function (data, type, row) {
                     var html = "<div class='text-center'>" +
-                        "<button class='btn btn-sm btn-success'  id=" + row.CustomerCode + " height='10' type='button' data-toggle='tooltip' data-placement='top' title='Detail Data' name='btnDetail' onclick=editDetail(this); ><em class='fa fa-edit'></em></button>&nbsp;" +
-                        "<button class='btn btn-sm btn-danger'  id=" + row.CustomerCode + " height='10' type='button' data-toggle='tooltip' data-placement='top' title='Delete Data' name='btnDeleted' onclick=deleteDetail(this); ><em class='fa fa-trash'></em></button>"
+                        "<td  style='text-align: center;'>" + "<button id=" + row.CustomerCode + " class='btn btn-sm btn-primary' height='20'  type='submit' onclick=editDetail(this) >View/Edit</button></td>&nbsp;" +
+                        "<td  style='text-align: center;'>" + "<button id=" + row.CustomerCode + " class='btn btn-sm btn-danger' height='20'  type='submit' onclick=deleteDetail(this) >Delete</button></td>" +
                     "</div>";
                     return html;
 
@@ -215,4 +217,8 @@ function Reset() {
     $('#email').val("");
     $('#phone').val("");
     $('#address').val("");
+}
+
+function closeModal() {
+    $("#confirmModal").modal("hide");
 }

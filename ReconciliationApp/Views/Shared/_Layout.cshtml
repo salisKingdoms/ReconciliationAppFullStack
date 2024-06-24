@@ -39,17 +39,24 @@
 
     <!-- Page CSS -->
     <!-- Helpers -->
-    <script src="~/theme/download/jquery/jquery.min.js"></script>
-    <script src="~/theme/assets/js/main.js"></script>
+
+    <script src="~/theme/download/jquery2/jquery.min.js"></script>
+    <script src="~/theme/download/jquery2/jquery.number.js"></script>
+    <script src="~/theme/download/toastr/toastr.min.js"></script>
+ 
+    @* <script src="~/theme/assets/vendor/js/helpers.js"></script> *@
+
+    @* <script src="~/theme/download/jquery/jquery.min.js"></script>
+    <script src="~/theme/assets/js/main.js"></script> *@
     <script src="~/theme/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="~/theme/assets/vendor/libs/popper/popper.js"></script>
     <script src="~/theme/assets/vendor/js/bootstrap.js"></script>
     <script src="~/theme/assets/vendor/js/bootstrap.js"></script>
-    <script src="~/theme/assets/vendor/js/helpers.js"></script>
+     
     <script src="~/theme/assets/vendor/js/menu.js"></script>
-    <script src="~/theme/download/toastr/toastr.min.js"></script>
-    <script src="~/theme/assets/vendor/js/helpers.js"></script>
-   
+
+
+    
     <script src="~/theme/download/moment/moment.min.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -172,6 +179,7 @@
                                 </div>*@
                             </div>
                         </div>
+                        <script src="~/theme/download/toastr/toastr.min.js"></script>
                         <main role="main" class="pb-3">
                             @RenderBody()
                         </main>

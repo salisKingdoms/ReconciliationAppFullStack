@@ -13,4 +13,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Theme\download\jquery2\" />
+  </ItemGroup>
+
 </Project>
